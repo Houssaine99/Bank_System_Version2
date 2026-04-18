@@ -1,0 +1,43 @@
+.vs/
+*.suo
+*.user
+*.VC.db
+*.VC.opendb
+*.ipch/
+ipch/
+[Dd]ebug/
+[Rr]elease/
+x64/
+Win32/
+*.obj
+*.pdb
+*.ilk
+*.iobj
+*.log
+*.tlog
+*.lastbuildstate
+
+# IntelliSense / Copilot / VS indexing
+**/CopilotIndices/
+**/FileContentIndex/
+**/SemanticSymbols.db
+**/CodeChunks.db
+
+# Build artifacts
+*.exe
+*.dll
+*.lib
+*.exp
+
+# Temporary files
+*.tmp
+*.temp
+
+# User-specific files
+*.opensdf
+*.sdf
+*.vsdx
+
+# CMake (if you ever use it)
+CMakeFiles/
+CMakeCache.txt
