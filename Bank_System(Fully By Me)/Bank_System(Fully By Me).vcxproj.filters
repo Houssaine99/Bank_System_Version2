@@ -143,5 +143,11 @@
     <ClInclude Include="Screens\Currency\clsUpdateRateScreen.h">
       <Filter>Header Files\Screens\Currency</Filter>
     </ClInclude>
+    <ClInclude Include="Screens\Client\clsClientATMTransferHistoryScreen.h">
+      <Filter>Header Files\Screens\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\clsReceipt.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

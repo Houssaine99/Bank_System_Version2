@@ -8,20 +8,21 @@
 #include "clsTotalBalancesScreen.h"
 #include "clsTransferScreen.h"
 #include "clsTransferLogScreen.h"
+#include "clsClientATMTransferHistoryScreen.h"
 
 
 class clsTransactionsScreen : protected clsScreen
 {
 private:
 
-    enum enTransactionsMenuOptions { eDeposit = 1, eWithdraw = 2, eTotalBalances = 3, eTransfer = 4, eTransferLog = 5, eMainMenu = 6 };
+    enum enTransactionsMenuOptions { eDeposit = 1, eWithdraw = 2, eTotalBalances = 3, eTransfer = 4, eTransferLog = 5, eClinetATMTransactionHistory = 6, eMainMenu = 7 };
 
     static short _ReadTransactionsMenuOption()
     {
         short Choice = 0;
 
-        std::cout << "Choose what do you want to do " << clsUtil::ColorText(clsUtil::LIGHTGREEN, "[1, 6]") << "? " << clsUtil::ColorText(clsUtil::LIGHTGREEN, "_");
-        Choice = clsInputValidate::ReadIntNumberBetween(1, 6, clsUtil::ColorText(clsUtil::RED, "Invalid Choice! Enter a number between (1 and 6)? _"));
+        std::cout << "Choose what do you want to do " << clsUtil::ColorText(clsUtil::LIGHTGREEN, "[1, 7]") << "? " << clsUtil::ColorText(clsUtil::LIGHTGREEN, "_");
+        Choice = clsInputValidate::ReadIntNumberBetween(1, 7, clsUtil::ColorText(clsUtil::RED, "Invalid Choice! Enter a number between (1 and 7)? _"));
 
         return Choice;
     }
@@ -49,6 +50,11 @@ private:
     static void _TransferLogScreen()
     {
         clsTransferLogScreen::ShowTransferLogScreen();
+    }
+
+    static void _ClientATMTransferHistoryScreen()
+    {
+        clsClientATMTransferHistoryScreen::ShowClientATMTransferHistoryScreen();
     }
 
     static void _GoBackToTransactionsMenu()
@@ -93,6 +99,12 @@ private:
             _GoBackToTransactionsMenu();
             break;
 
+        case enTransactionsMenuOptions::eClinetATMTransactionHistory:
+            system("cls");
+            _ClientATMTransferHistoryScreen();
+            _GoBackToTransactionsMenu();
+            break;
+
         case enTransactionsMenuOptions::eMainMenu:{}
         }
     }
@@ -117,7 +129,8 @@ public:
         clsUtil::PrintMenuOption("Total Balances", 3);
         clsUtil::PrintMenuOption("Transfer", 4);
         clsUtil::PrintMenuOption("Transfer Log", 5);
-        clsUtil::PrintMenuOption("Main Menu", 6);
+        clsUtil::PrintMenuOption("Client ATM Transactions History", 6);
+        clsUtil::PrintMenuOption("Main Menu", 7);
         std::cout << "\n";
         clsUtil::DrawLine('=');
         _PerformTransactionMenuOptions((enTransactionsMenuOptions)_ReadTransactionsMenuOption());

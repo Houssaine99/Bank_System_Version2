@@ -129,6 +129,7 @@
     <ClInclude Include="Core\clsBankClient.h" />
     <ClInclude Include="Core\clsCurrency.h" />
     <ClInclude Include="Core\clsPerson.h" />
+    <ClInclude Include="Core\clsReceipt.h" />
     <ClInclude Include="Core\clsUser.h" />
     <ClInclude Include="Global.h" />
     <ClInclude Include="Lib\clsDate.h" />
@@ -136,6 +137,7 @@
     <ClInclude Include="Lib\clsString.h" />
     <ClInclude Include="Lib\clsUtil.h" />
     <ClInclude Include="Screens\Client\clsAddNewClientScreen.h" />
+    <ClInclude Include="Screens\Client\clsClientATMTransferHistoryScreen.h" />
     <ClInclude Include="Screens\Client\clsDeleteClientScreen.h" />
     <ClInclude Include="Screens\Client\clsDepositScreen.h" />
     <ClInclude Include="Screens\Client\clsFindClientScreen.h" />

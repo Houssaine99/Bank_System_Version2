@@ -2,6 +2,11 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <Windows.h>
+#include <random>
+
+#undef max
+#undef min
 
 #include "clsDate.h"
 
@@ -11,18 +16,28 @@ public:
 
 	enum enCharType { SmallLetter = 1, CapitalLetter = 2, SpecialCharacter = 3, Digit = 4, MixChars = 5 };
 
-	enum enColor { RED = 0, GREEN = 1, YELLOW = 2, BLUE = 3, MAGENTA = 4, CYAN = 5, WHITE = 6, LIGHTGREEN = 7 };
+	enum enColor { RED = 0, GREEN = 1, YELLOW = 2, BLUE = 3, MAGENTA = 4, CYAN = 5, WHITE = 6, LIGHTGREEN = 7, BLACK = 8 };
 
 	static void Srand()
 	{
 		srand((unsigned)time(NULL));
 	}
 
-	static int RandomNumber(int From, int To)
+	/*static int RandomNumber(int From, int To)
 	{
+		
 		int RandomNumber = rand() % (To - From + 1) + From;
 
 		return RandomNumber;
+	}*/
+
+	static int RandomNumber(int From, int To)
+	{
+		static std::random_device rd;
+		static std::mt19937 gen(rd());
+		std::uniform_int_distribution<> dist(From, To);
+
+		return dist(gen);
 	}
 
 	static char GetRandomCharacter(enCharType CharType)
@@ -376,6 +391,41 @@ public:
 		case WHITE:
 			return "\033[0m" + Text + "\033[0m";
 
+		case BLACK:
+			return "\033[30m" + Text + "\033[0m";
+
+		}
+
+	}
+
+	static std::string ColorTextBackGround(enColor Color, std::string Text)
+	{
+		switch (Color)
+		{
+		case RED:
+			return  "\033[41m" + Text + "\033[0m";
+
+		case GREEN:
+			return "\033[42m" + Text + "\033[0m";
+
+		case YELLOW:
+			return "\033[43m" + Text + "\033[0m";
+
+		case BLUE:
+			return "\033[44m" + Text + "\033[0m";
+
+		case MAGENTA:
+			return "\033[45m" + Text + "\033[0m";
+
+		case CYAN:
+			return "\033[46m" + Text + "\033[0m";
+
+		case LIGHTGREEN:
+			return "\033[102m" + Text + "\033[0m";
+
+		case WHITE:
+			return "\033[0m" + Text + "\033[0m";
+
 		}
 
 	}
@@ -412,7 +462,7 @@ public:
 
 		short TitleSpeacing = (Length - Title.size()) / 2;
 
-		std::cout << std::left << std::setw(LeadingSpaces) << "" << ColorText(Color, "|") << std::string(TitleSpeacing, ' ') << Title;
+		std::cout << std::left << std::setw(LeadingSpaces) << "" << ColorText(Color, "|") << std::string(TitleSpeacing, ' ') << ColorTextBackGround(BLUE, Title);
 		std::cout << std::string(TitleSpeacing - SpacesBeforClosingTheTitleBox, ' ') << ColorText(Color, "|") << "\n";
 	}
 
@@ -427,7 +477,7 @@ public:
 
 		short TitleSpeacing = (Length - Title.size()) / 2;
 
-		std::cout << std::left << std::setw(LeadingSpaces) << "" << ColorText(clsUtil::LIGHTGREEN, "|") << std::string(TitleSpeacing, ' ') << Title;
+		std::cout << std::left << std::setw(LeadingSpaces) << "" << ColorText(clsUtil::LIGHTGREEN, "|") << std::string(TitleSpeacing, ' ') << ColorTextBackGround(BLUE, Title);
 		std::cout << std::string(TitleSpeacing - SpacesBeforClosingTheTitleBox, ' ') << ColorText(clsUtil::LIGHTGREEN, "|") << "\n";
 	}
 
@@ -456,6 +506,20 @@ public:
 	static void PrintMenuOption(std::string Option, short OptionOrder)
 	{
 		std::cout << ColorTextBlock(BLUE, LIGHTGREEN, "[", std::to_string(OptionOrder), "]") << " - " << Option <<".\n";
+	}
+
+	static void PrintLetterByLetter(std::string Text, int Speed = 100)
+	{
+		for (int i = 0; i < Text.size(); i++)
+		{
+			std::cout << Text[i];
+			Sleep(Speed);
+		}
+	}
+
+	static void LeadingSpaces(short NumberOfSpaces)
+	{
+		std::cout << std::left << std::setw(NumberOfSpaces) << "";
 	}
 };
 
